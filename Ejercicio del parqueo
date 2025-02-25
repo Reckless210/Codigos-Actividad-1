@@ -1,0 +1,100 @@
+/*Calculadora de Tarifas de Estacionamiento  
+ Se debe desarrollar un programa en C# que permita calcular el costo del estacionamiento de 
+ un vehículo según el tiempo que ha permanecido en el parqueo. 
+ El sistema debe solicitar: 
+ 1. Tipo de vehículo: o Automóvil o Motocicleta o Camión 
+ 2. Horas de estacionamiento (entre 1 y 24 horas). 
+ 3. Cálculo del costo total según la siguiente tarifa: 
+Tipo de Vehículo Tarifa por Hora 
+Automóvil$2.00 Motocicleta$1.00 Camión$3.50 
+4. Si el tiempo es mayor a 5 horas, se aplica un 10% de descuento sobre el total. 
+5. Mostrar el costo total a pagar.*/
+
+  Console.WindowHeight = 100;
+  Console.WindowWidth = 80;
+  Console.BackgroundColor = ConsoleColor.White;
+  Console.ForegroundColor = ConsoleColor.Black;
+  Console.Clear();
+  Console.Write("\n");
+  Console.WriteLine("\tCALCULADORA DE TARIFA DE VEHICULO");
+  Console.Write("\n");
+  //Declaracion de variables
+  double Total = 0, tarifaNeta = 0, Descuento = 0;
+  int opcion;
+  int[] opcionesvalida = [1, 2, 3];
+  int[] horasvalidas = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+  bool esValido = false;
+  bool tieneError = false;
+  string errorMsg = "";
+  double HORAS_MINIMAS_DESCUENTO = 5;
+  double DESCUENTO_HORAS_MINIMAS = 0.10;
+  int horas;
+  while (!esValido)
+  {
+      if (tieneError) { Console.WriteLine("Ocurrió un error: " + errorMsg); }
+      Console.BackgroundColor = ConsoleColor.Green;
+      Console.ForegroundColor = ConsoleColor.Black;
+      Console.WriteLine("\t*");
+      Console.BackgroundColor = ConsoleColor.White;
+      Console.ForegroundColor = ConsoleColor.Black;
+      Console.WriteLine("\tTipos de vehiculos...:");
+      Console.WriteLine("\t   1. AUTOMOVIL..($2.00/h)  ");
+      Console.WriteLine("\t   2. MOTOCICLETA..($1.00/h) ");
+      Console.WriteLine("\t   3. CAMION..($3.50/h)  ");
+      Console.BackgroundColor = ConsoleColor.Green;
+      Console.ForegroundColor = ConsoleColor.Black;
+      Console.WriteLine("\t*");
+      Console.BackgroundColor = ConsoleColor.White;
+      Console.ForegroundColor = ConsoleColor.Black;
+      Console.Write("\n");
+      Console.WriteLine("\tDijite su opcion del [1 al 3] :");
+      opcion = int.Parse(Console.ReadLine());
+      if (!opcionesvalida.Contains(opcion))
+      {
+          errorMsg = $"La opcion ingresada es incorrecta:  {opcion}";
+          esValido = false;
+          tieneError = true;
+          continue;
+      }
+      Console.WriteLine("\tDigite las horas de estacionamiento [1-24 h]");
+      string horasString = Console.ReadLine();
+
+      if (!int.TryParse(horasString,out horas)) {
+          errorMsg = "Solamente se permiten numeros enteros";
+          esValido = false;
+          tieneError = true;
+          continue;
+      }
+
+      if (!horasvalidas.Contains(horas)) {
+          errorMsg = "La cantidad de horas debe estar ente [1-24 h]";
+          esValido = false;
+          tieneError = true;
+          continue;
+      }
+
+      if (opcion == 1)
+      {
+          double TARIFA_VEHICULO = 2;
+           tarifaNeta= horas* TARIFA_VEHICULO;
+          if (horas > HORAS_MINIMAS_DESCUENTO) { Descuento = tarifaNeta * DESCUENTO_HORAS_MINIMAS; }
+          Total = (tarifaNeta - Descuento);
+      }
+      else if (opcion == 2)
+      {
+          double TARIFA_MOTOCICLETA = 1;
+          tarifaNeta = horas * TARIFA_MOTOCICLETA;
+          if (horas > HORAS_MINIMAS_DESCUENTO) { Descuento = tarifaNeta * DESCUENTO_HORAS_MINIMAS; }
+          Total = (tarifaNeta - Descuento);
+      }
+      else if (opcion == 3)
+      {
+          double TARIFA_CAMION = 3.50;
+          tarifaNeta = horas * TARIFA_CAMION;
+          if (horas > HORAS_MINIMAS_DESCUENTO) { Descuento = tarifaNeta * DESCUENTO_HORAS_MINIMAS; }
+          Total = (tarifaNeta - Descuento);
+      }
+      Console.WriteLine("Descuento a aplicar: $"+ Math.Round(Descuento,2));
+      Console.WriteLine("Total a pagar: $" + Math.Round(Total,2));
+      esValido = true;
+      Console.ReadKey();
