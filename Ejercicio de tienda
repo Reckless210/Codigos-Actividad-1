@@ -1,0 +1,111 @@
+Console.ForegroundColor = ConsoleColor.Green;
+Console.BackgroundColor = ConsoleColor.Black;
+Console.Clear();
+Console.Title = "Calculadora de Descuentos en una Tienda";
+Console.Write("\n\tPrimer evaluado");
+Console.Write("\n\n");
+
+//Declaracion de variables 
+int opcion = 0;
+string cliente;
+double mcompra = 0, descuentoI = 0, descuentoA = 0, total = 0;
+
+// Entrada de datos 
+Console.Write("\tIngrese el nombre del cliente: ");
+cliente = Console.ReadLine();
+
+// Validación del monto de compra usando while
+bool montoValido = false;
+while (!montoValido)
+{
+    Console.Write("\tIngrese el monto total de la compra: ");
+    mcompra = double.Parse(Console.ReadLine()); // Convertimos directamente a double
+    if (mcompra > 0)
+    {
+        montoValido = true; // Salimos del bucle si el monto es válido
+    }
+    else
+    {
+        Console.WriteLine("\tError: El monto debe ser un número positivo. Intente nuevamente.");
+    }
+}
+
+Console.WriteLine("\t-----------------------------------------");
+Console.WriteLine("\t     [1]  Cliente Normal                 ");
+Console.WriteLine("\t     [2]  Cliente Premium                ");
+Console.WriteLine("\t     [3]  Cliente VIP                    ");
+Console.WriteLine("\t-----------------------------------------");
+
+// Validación del tipo de cliente usando while
+bool opcionValida = false;
+while (!opcionValida)
+{
+    Console.Write("\tSeleccione el tipo de cliente (1, 2, 3): ");
+    opcion = int.Parse(Console.ReadLine()); 
+    if (opcion >= 1 && opcion <= 3)
+    {
+        opcionValida = true; // Salimos del bucle si la opción es válida
+    }
+    else
+    {
+        Console.WriteLine("\tError: Seleccione una opción válida (1, 2, 3) ");
+    }
+}
+
+Console.WriteLine("\n");
+
+
+// Ingreso de datos 
+if (opcion == 1) // Seleccionamos la opcion 1 "Normal"
+{
+    descuentoI = 0; // No se le aplica descuento
+}
+else if (opcion == 2) // Seleccionamos la opcion del cliente "Premium"
+{
+    descuentoI = 0.10; // Se le aplica un 10% al ser cliente "Premium"
+}
+else if (opcion == 3) // Seleccionamos la opcion del Cliente "VIP"
+{
+    descuentoI = 0.20; // Se le aplica un 20% al ser Cliente "VIP"
+
+}
+
+if (mcompra > 500)
+{
+    descuentoA = 0.05; // Se le aplica un descuento de %5 por su compra mayor a 500
+}
+
+double descuentoInicial = mcompra * descuentoI; // Descuento inicial
+double descuentoAdicional = mcompra * descuentoA; // Descuento adicional
+total = mcompra - descuentoInicial - descuentoAdicional; // Total final
+int descuentoAplicado = (int)((descuentoI + descuentoA) * 100);
+
+// Mostrar resultados
+Console.WriteLine("\n\tResumen de la compra:");
+Console.WriteLine($"\tNombre del cliente: {cliente}");
+Console.WriteLine($"\tMonto total de la compra: ${mcompra:F2}");
+Console.WriteLine($"\tDescuento aplicado: {descuentoAplicado}%"); 
+Console.WriteLine($"\tTotal a pagar: ${total:F2}");
+
+// Pantalla adicional 
+Console.Write("\t");
+Console.ForegroundColor = ConsoleColor.Green;
+Console.BackgroundColor = ConsoleColor.Black;
+Console.WriteLine("*********************************************");
+Console.ForegroundColor = ConsoleColor.Green;
+Console.BackgroundColor = ConsoleColor.Black;
+Console.WriteLine("\t*                                           *");
+Console.WriteLine("\t*     Este programa fue diseñado por:       *");
+Console.WriteLine("\t*                                           *");
+Console.WriteLine("\t*             Camilo Villeda                *");
+Console.WriteLine("\t*                                           *");
+Console.Write("\t");
+Console.ForegroundColor = ConsoleColor.Green;
+Console.BackgroundColor = ConsoleColor.Black;
+Console.WriteLine("*********************************************");
+Console.ForegroundColor = ConsoleColor.Green;
+Console.BackgroundColor = ConsoleColor.Black;
+Console.Write("\t");
+Console.WriteLine("--> Fin del Programa");
+Console.Write("\t");
+Console.ReadKey();
