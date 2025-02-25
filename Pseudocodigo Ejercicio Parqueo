@@ -1,0 +1,56 @@
+INICIO
+    MOSTRAR "CALCULADORA DE TARIFA DE VEHÍCULO"
+    // Declaración de variables
+double Total = 0, tarifaNeta = 0, Descuento = 0;
+int opcion;
+int[] opcionesvalida = [1, 2, 3];
+bool esValido = false;
+bool tieneError = false;
+string errorMsg = "";
+double HORAS_MINIMAS_DESCUENTO = 5;
+double DESCUENTO_HORAS_MINIMAS = 0.10;
+int horas; 
+MIENTRAS no esValido 
+            MOSTRAR "Ocurrió un error: ", errorMsg
+      //Mostrar menú
+        MOSTRAR "Tipos de vehículos:"
+        MOSTRAR "   1. AUTOMÓVIL..($2.00/h)"
+        MOSTRAR "   2. MOTOCICLETA..($1.00/h)"
+        MOSTRAR "   3. CAMIÓN..($3.50/h)"
+        MOSTRAR "Digite su opción [1 al 3]:"
+        LEER opción
+        SI opción NO ESTÁ EN {1, 2, 3} ENTONCES
+            errorMsg ← "La opción ingresada es incorrecta: " + opción
+            tieneError ← VERDADERO
+            CONTINUAR
+        MOSTRAR "Digite las horas de estacionamiento [1-24 h]:"
+SI horasstring NO ESTÁ EN {1 -24} ENTONCES
+            errorMsg ← " "Solamente se permiten numeros enteros"
+            tieneError ← VERDADERO
+            CONTINUAR
+SI horasvalidas NO ESTÁ EN {1 -24} ENTONCES
+            errorMsg ← " La cantidad de horas debe estar ente [1-24 h] "
+            tieneError ← VERDADERO
+            CONTINUAR
+
+        LEER horas
+        // Calcular tarifa según tipo de vehículo
+        SEGÚN opción HACER
+            CASO 1:
+                TARIFA_VEHICULO ← 2
+                tarifaNeta ← horas * TARIFA_VEHICULO
+            CASO 2:
+                TARIFA_MOTOCICLETA ← 1
+                tarifaNeta ← horas * TARIFA_MOTOCICLETA
+            CASO 3:
+                TARIFA_CAMION ← 3.50
+                tarifaNeta ← horas * TARIFA_CAMION
+        // Aplicar descuento si aplica
+        SI horas > HORAS_MINIMAS_DESCUENTO ENTONCES
+ Descuento ← tarifaNeta * DESCUENTO_HORAS_MINIMAS
+  Total ← tarifaNeta - Descuento
+  MOSTRAR "Descuento a aplicar: $", REDONDEAR(Descuento,2)
+   MOSTRAR "Total a pagar: $", REDONDEAR(Total,2)
+      esValido ← VERDADERO
+    
+FIN
