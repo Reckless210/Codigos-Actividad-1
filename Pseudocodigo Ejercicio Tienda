@@ -1,0 +1,90 @@
+Realizamos un programa de consola usando C# la finalidad de este programa es poder aplicar descuento a cliente seleccionados y poder aplicar un descuento de 5% a todos los clientes con una compra mayor a los $500
+INICIO
+    // Configuración inicial de la consola para mostrar el fondo de la consola y el color del texto 
+    Establecer color de texto en Verde
+    Establecer color de fondo en Negro
+    Limpiar la pantalla
+    Establecer título de la consola: "Calculadora de Descuentos en una Tienda"
+    Mostrar mensaje: "Primer evaluado"
+
+    // Declaramos las variables que se usaran en el código 
+    ENTERO opcion = 0
+    CADENA cliente
+    REAL mcompra = 0, descuentoI = 0, descuentoA = 0, total = 0
+
+    // Introducimos los datos que requerimos que digite el usuario 
+    ESCRIBIR "Ingrese el nombre del cliente: "
+    LEER cliente
+
+    // Validamos el monto de la compra, en caso de que sea menor a 0 muestra mensaje de error
+    BOOLEANO montoValido = FALSO
+    MIENTRAS (montoValido == FALSO) HACER
+        ESCRIBIR "Ingrese el monto total de la compra: "
+        LEER mcompra
+        SI (mcompra > 0) ENTONCES
+            montoValido = VERDADERO
+        SINO
+            ESCRIBIR "Error: El monto debe ser un número positivo. Intente nuevamente."
+        FIN_SI
+    FIN_MIENTRAS
+
+    // Mostrar menú de tipos de cliente
+    ESCRIBIR "-----------------------------------------"
+    ESCRIBIR "[1] Cliente Normal"
+    ESCRIBIR "[2] Cliente Premium"
+    ESCRIBIR "[3] Cliente VIP"
+    ESCRIBIR "-----------------------------------------"
+
+    // Validamos que se escoja una opción entre el 1 y el 3 en caso de escoger otra muestra mensaje de error y pide verificar el numero
+    BOOLEANO opcionValida = FALSO
+    MIENTRAS (opcionValida == FALSO) HACER
+        ESCRIBIR "Seleccione el tipo de cliente (1, 2, 3): "
+        LEER opcion
+        SI (opcion >= 1 Y opcion <= 3) ENTONCES
+            opcionValida = VERDADERO
+        SINO
+            ESCRIBIR "Error: Seleccione una opción válida (1, 2 o 3)."
+        FIN_SI
+    FIN_MIENTRAS
+
+    // Determinamos el descuento inicial según el tipo de cliente
+    SI (opcion == 1) ENTONCES
+        descuentoI = 0 // Cliente Normal: Sin descuento
+    SINO SI (opcion == 2) ENTONCES
+        descuentoI = 0.10 // Cliente Premium: 10% de descuento
+    SINO SI (opcion == 3) ENTONCES
+        descuentoI = 0.20 // Cliente VIP: 20% de descuento
+    FIN_SI
+
+    // Aplicamos un descuento adicional si el monto es mayor a $500
+    SI (mcompra > 500) ENTONCES
+        descuentoA = 0.05 // Descuento adicional del 5%
+    FIN_SI
+
+    // Se calcula el total a pagar
+    REAL descuentoInicial = mcompra * descuentoI
+    REAL descuentoAdicional = mcompra * descuentoA
+    total = mcompra - descuentoInicial - descuentoAdicional
+
+    // Para que al final nos muestre Un entero realizamos esta función, en todo caso nos aparecería muchos decimales 
+    ENTERO descuentoAplicado = (descuentoI + descuentoA) * 100
+
+    // Mostramos los resultados de los datos seleccionados
+    ESCRIBIR ""
+    ESCRIBIR "Resumen de la compra:"
+    ESCRIBIR "Nombre del cliente:", cliente
+    ESCRIBIR "Monto total de la compra: $", mcompra
+    ESCRIBIR "Descuento aplicado: ", descuentoAplicado, "%"
+    ESCRIBIR "Total a pagar: $", total
+
+    // Esta es una pantalla adicional lo cual le da un poco más de estética al proyecto
+    ESCRIBIR "*********************************************"
+    ESCRIBIR "*                                           *"
+    ESCRIBIR "*     Este programa fue diseñado por:       *"
+    ESCRIBIR "*                                           *"
+    ESCRIBIR "*             Camilo Villeda                *"
+    ESCRIBIR "*                                           *"
+    ESCRIBIR "*********************************************"
+    ESCRIBIR "--> Fin del Programa"
+
+FIN
